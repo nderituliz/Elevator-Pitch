@@ -7,7 +7,7 @@
 
 # Behaviour Driven Development.
 With the application, a user is able to:
-* Vie## tech-pitch
+* Vie## elevator-pitch
 2
 ​
 3
