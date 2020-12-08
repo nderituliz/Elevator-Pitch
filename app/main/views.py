@@ -68,3 +68,23 @@ def new_category():
     title = 'New category'
     return render_template('new_category.html', category_form = form, title = title)
 
+
+@main.route('/categories/<int:id>')
+def category(id):
+    category = PitchCategory.query.get(id)
+    if category is None:
+        abort(404)
+
+    pitches = Pitch.get_pitches(id)
+    return render_template('category.html', pitches=pitches, category=category)
+
+
+@main.route('/categories/<int:id>')
+def category(id):
+    category = PitchCategory.query.get(id)
+    if category is None:
+        abort(404)
+
+    pitches = Pitch.get_pitches(id)
+    return render_template('category.html', pitches=pitches, category=category)
+
