@@ -1,4 +1,4 @@
-## tech-pitch
+## Elevator-Pitch
 
 # BY Liz Nderitu
 
