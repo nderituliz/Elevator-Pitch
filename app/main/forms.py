@@ -7,5 +7,5 @@ class PitchForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class CommentForm(FlaskForm):
-    opinion = TextAreaField('Write a Comment')
+    opinion = TextAreaField('Post your Comment')
     submit = SubmitField('Submit')
