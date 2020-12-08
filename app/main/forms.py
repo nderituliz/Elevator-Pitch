@@ -9,3 +9,7 @@ class PitchForm(FlaskForm):
 class CommentForm(FlaskForm):
     opinion = TextAreaField('Post your Comment')
     submit = SubmitField('Submit')
+
+class CategoryForm(FlaskForm):
+    name = StringField('Category Name', validators=[Required()])
+    submit = SubmitField('Create')
