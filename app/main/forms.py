@@ -5,3 +5,7 @@ from wtforms.validators import Required
 class PitchForm(FlaskForm):
     content = TextAreaField('Post your Elevator Pitch',validators=[Required()])
     submit = SubmitField('Submit')
+
+class CommentForm(FlaskForm):
+    opinion = TextAreaField('Write a Comment')
+    submit = SubmitField('Submit')
