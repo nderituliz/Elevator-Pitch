@@ -78,13 +78,39 @@ def category(id):
     pitches = Pitch.get_pitches(id)
     return render_template('category.html', pitches=pitches, category=category)
 
+@main.route('/add/category', methods=['GET','POST'])
+@login_required
+def new_category():
+    """
+    View new group route function that returns a page with a form to create a category
+    """
+    
+    form = CategoryForm()
 
-@main.route('/categories/<int:id>')
-def category(id):
-    category = PitchCategory.query.get(id)
-    if category is None:
+    if form.validate_on_submit():
+        name = form.name.data
+        new_category = PitchCategory(name = name)
+        new_category.save_category()
+
+        return redirect(url_for('.index'))
+
+    title = 'New category'
+    return render_template('new_category.html', category_form = form, title = title)
+
+@main.route('/view-pitch/<int:id>', methods=['GET', 'POST'])
+@login_required
+def view_pitch(id):
+    """
+    Function the returns a single pitch for a comment to be added
+    """
+    all_category = PitchCategory.get_categories()
+    pitches = Pitch.query.get(id)
+    # pitches = Pitch.query.filter_by(id=id).all()
+
+    if pitches is None:
         abort(404)
 
-    pitches = Pitch.get_pitches(id)
-    return render_template('category.html', pitches=pitches, category=category)
-
+    comment = Comments.get_comments(id)
+    count_likes = Votes.query.filter_by(pitches_id=id, vote=1).all()
+    count_dislikes = Votes.query.filter_by(pitches_id=id, vote=2).all()
+    return render_template('view_pitch.html', pitches = pitches, comment = comment, count_likes=len(count_likes), count_dislikes=len(count_dislikes), category_id = id, categories=all_category)
